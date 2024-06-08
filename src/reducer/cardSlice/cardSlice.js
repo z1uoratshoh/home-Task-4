@@ -105,6 +105,12 @@ export const cardSlice = createSlice({
     addimg : "",
     addtitle : "",
     addtext : "",
+
+    editDialog : false ,
+    editimg : "",
+    edittitle : "",
+    edittext : "",
+
   },
   reducers: {
     deleteUser : (state , action) =>{
@@ -166,11 +172,46 @@ export const cardSlice = createSlice({
         state.addtitle = '',
         state.addtext = ''
         state.addDialog = false
+    },
+
+    open_close_edit : (state , action) =>{
+        state.editDialog = action.payload[0]
+        state.editimg = action.payload[1].img
+        state.edittitle = action.payload[1].title
+        state.edittext = action.payload[1].desc
+        state.idx = action.payload[1].id
+    },
+    // Idx : (state , action) =>{
+    //     // state.idx = action.payload
+    //     console.log(action.payload);
+    // },
+    editImg : (state , action) =>{
+        state.editimg = action.payload
+    },
+    editTitle : (state , action) =>{
+        state.edittitle = action.payload
+    },
+    editText : (state , action) =>{
+        state.edittext = action.payload
+    },
+    edit_dial : (state , action) =>{
+        console.log(state.idx);
+        state.data.map((elem) =>{
+            if(elem.id == state.idx){
+                elem.id = state.idx,
+                elem.title = state.edittitle
+                elem.desc = state.edittext
+            }
+            
+        })
+        state.editDialog = false
     }
+
+
   },
 })
 
 
-export const { deleteUser , checkCard , sarchCard , allSelects , activeSelects , inactiveSelects , open_close_add , inpImg , inpTitle ,inpText , AddCard} = cardSlice.actions
+export const { deleteUser , checkCard , sarchCard , allSelects , activeSelects , inactiveSelects , open_close_add , inpImg , Idx , inpTitle ,inpText , AddCard  , open_close_edit , edit_dial , editImg , editTitle , editText} = cardSlice.actions
 
 export default cardSlice.reducer

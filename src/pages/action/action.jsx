@@ -12,8 +12,9 @@ import SearchIcon from '@mui/icons-material/Search';
 import DirectionsIcon from '@mui/icons-material/Directions';
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import { deleteUser , checkCard , sarchCard , allSelects , activeSelects , inactiveSelects} from '../../reducer/cardSlice/cardSlice';
+import { deleteUser , checkCard , sarchCard , allSelects , activeSelects , inactiveSelects ,Idx, open_close_edit, edit_dial} from '../../reducer/cardSlice/cardSlice';
 import AddDialog from '../../components/addDialog';
+import EditDialog from '../../components/editDialog';
 
 
 const Action = () => {
@@ -55,6 +56,8 @@ const Action = () => {
 
         <AddDialog/>
 
+        <EditDialog/>
+
     <div className='w-[95%] m-auto mt-[5%] flex-wrap gap-[20px] f_l'>
       {data.filter((el) =>{
         if(el.title.toLowerCase().trim().includes(sarch.toLowerCase().trim()))
@@ -72,6 +75,7 @@ const Action = () => {
                 </Button>
                 <input type="checkbox"  checked={elem.status == "active" ? true :false} onChange={() => dispatch(checkCard(elem.id))}/>
                 </div>
+                <button onClick={() => dispatch( open_close_edit([true,elem]) )}>Edit</button>
             </div>
         )
       })}

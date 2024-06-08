@@ -25,7 +25,7 @@ const AddDialog = () => {
   return (
     <div>
       <Button variant="outlined" onClick={() => dispatch(open_close_add(true))}>
-        Open alert dialog
+        Add
       </Button>
       <Dialog
         open={open_close}
